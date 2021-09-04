@@ -111,5 +111,64 @@ if page == 'Prediction and Recommendations':
         'What is the current daily price?',
         min_value = 0.0,
         max_value = 10_000.0,
-        step= 0.1,
-        format = '%d')
+        step= 0.01)
+
+
+    st.write('Calendar information')
+
+    minimum_nights = st.number_input(
+        "What's the current minimum number of nights required to stay at this listing?",
+        min_value = 0,
+        step= 1)
+
+    maximum_nights	= st.number_input(
+        "What's the current maximum number of nights required to stay at this listing?",
+        min_value = 0,
+        step= 1)
+
+    minimum_nights_avg_ntm = st.number_input(
+        "What's the average minimum number of nights required to stay at this listing looking 365 nights into the future? (full calendar rules may differ)",
+        min_value = 0,
+        step= 1)
+
+    maximum_nights_avg_ntm = st.number_input(
+        "What's the average maximum number of nights required to stay at this listing looking 365 nights into the future? (full calendar rules may differ)",
+        min_value = 0,
+        step= 1)
+
+    availability_30	= st.number_input(
+        "How many days is this listing currently available to book in the next 30 days?",
+        min_value = 0,
+        max_value = 30,
+        step= 1)
+
+    availability_60	= st.number_input(
+        "How many days is this listing currently available to book in the next 60 days?",
+        min_value = 0,
+        max_value = 60,
+        step= 1)
+
+    availability_90	= st.number_input(
+        "How many days is this listing currently available to book in the next 90 days?",
+        min_value = 0,
+        max_value = 90,
+        step= 1)
+
+    availability_365 = st.number_input(
+        "How many days is this listing currently available to book in the next 365 days?",
+        min_value = 0,
+        max_value = 365,
+        step= 1)
+
+    instant_bookable = st.radio('Is the listing instantly bookable?',
+    ['Yes', 'No'])
+
+    days_since_first_review =st.number_input(
+        "How many days has it been since the listing received its first review?",
+        min_value = 0,
+        step= 1)
+
+    days_since_last_review =st.number_input(
+        "How many days has it been since the listing received its most recent review?",
+        min_value = 0,
+        step= 1)
