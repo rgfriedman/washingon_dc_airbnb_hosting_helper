@@ -73,3 +73,43 @@ if page == 'Prediction and Recommendations':
     ['within an hour', 'within a few hours', 'within a day', 'unknown'])
 
     st.write('Listing details')
+
+    neighborhood_list = pickle.load(open('../models/neighborhood_list.pkl','rb'))
+
+    neighbourhood_cleansed = st.selectbox('Select the neighborhood where your listing is located:',
+        sorted(neighborhood_list))
+
+    room_type_list = pickle.load(open('../models/room_type_list.pkl','rb'))
+
+    room_type = st.selectbox('Select the type of listing:',
+        sorted(room_type_list))
+
+    accommodates = st.number_input(
+        'How many people does the property accomodate?',
+        min_value = 0,
+        step= 1)
+
+    bedrooms = st.number_input(
+        'How many bedrooms does the listing have?',
+        min_value = 0.0,
+        max_value = 40.0,
+        step= 0.5)
+
+    beds = st.number_input(
+        'How many beds does the listing have?',
+        min_value = 0,
+        max_value = 40,
+        step= 1)
+
+    bathrooms = st.number_input(
+        'How many bathrooms does the listing have?',
+        min_value = 0.0,
+        max_value = 20.0,
+        step= 0.5)
+
+    price = st.number_input(
+        'What is the current daily price?',
+        min_value = 0.0,
+        max_value = 10_000.0,
+        step= 0.1,
+        format = '%d')
