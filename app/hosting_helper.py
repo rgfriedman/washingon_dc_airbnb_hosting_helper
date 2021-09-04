@@ -69,8 +69,11 @@ if page == 'Prediction and Recommendations':
         min_value = 0.00,
         max_value = 1.00)
 
-    host_response_time= st.radio('What is your response time?',
-    ['within an hour', 'within a few hours', 'within a day', 'unknown'])
+
+    response_time_list = pickle.load(open('../models/response_time_list.pkl','rb'))
+
+    host_response_time= st.selectbox('What is your response time?',
+    sorted(response_time_list))
 
     st.write('Listing details')
 
@@ -113,6 +116,39 @@ if page == 'Prediction and Recommendations':
         max_value = 10_000.0,
         step= 0.01)
 
+    st.write('Please select all emenities that your listing offers:')
+    wifi = st.checkbox('wifi')
+    smoke_alarm	= st.checkbox('smoke alarm')
+    essentials	= st.checkbox('essentials')
+    heating	= st.checkbox('heating')
+    air_conditioning	= st.checkbox('air conditioning')
+    hangers	= st.checkbox('hangers')
+    iron	= st.checkbox('iron')
+    kitchen	=  st.checkbox('kitchen')
+    long_term_stays_allowed	= st.checkbox('long term stays allowed')
+    hair_dryer	= st.checkbox('hair dryer')
+    carbon_monoxide_alarm	= st.checkbox('carbon monoxide alarm')
+    hot_water	= st.checkbox('hot water')
+    shampoo	= st.checkbox('shampoo')
+    dedicated_workspace	= st.checkbox('dedicated workspace')
+    dishes_and_silverware	= st.checkbox('dishes and silverware')
+    microwave	= st.checkbox('microwave')
+    washer	= st.checkbox('washer')
+    dryer	= st.checkbox('dryer')
+    fire_extinguisher	= st.checkbox('fire extinguisher')
+    refrigerator	= st.checkbox('refrigerator')
+    coffee_maker	= st.checkbox('coffee maker')
+    cooking_basics	= st.checkbox('cooking basics')
+    private_entrance	= st.checkbox('private entrance')
+    bed_linens	= st.checkbox('bed linens')
+    stove	= st.checkbox('stove')
+    oven	= st.checkbox('oven')
+    free_street_parking	= st.checkbox('free street parking')
+    dishwasher	= st.checkbox('dishwasher')
+    first_aid_kit	= st.checkbox('first aid kit')
+    extra_pillows_and_blankets	= st.checkbox('extra pillows and blankets')
+    tv	= st.checkbox('tv')
+    patio_or_balcony= st.checkbox('patio or balcony')
 
     st.write('Calendar information')
 
