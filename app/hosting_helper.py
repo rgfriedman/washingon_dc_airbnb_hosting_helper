@@ -2,9 +2,10 @@ import streamlit as st
 import pickle
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import ExtraTreesClassifier
+from nltk.corpus import stopwords
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from nltk.tokenize import RegexpTokenizer
 
 st.title('Washington D.C. Airbnb Hositing Helper')
 st.write('Use this app to predict if your Airbnb listing will be one of the most popular listings in the current Washington D.C. market and get recommendations on how to increase its popularity.')
@@ -26,27 +27,75 @@ if page == 'Prediction and Recommendations':
     st.write('Listing overview')
 
     name = st.text_input('Listing name:',
-        value='')
+        value=' ')
 
     description = st.text_input('Listing description:',
-        value='')
+        value=' ')
 
     neighborhood_overview = st.text_input('Neighborhood overview in listing:',
-        value='')
+        value=' ')
 
     st.write('Host Information')
 
     host_about = st.text_input('About the host in listing:',
-        value='')
+        value=' ')
+
+    #process text entry
+
+    tokenizer = RegexpTokenizer(r'\w+')
+
+    sentiment = SentimentIntensityAnalyzer()
+
+    #name text
+    name = name.lower()
+    name = ' '.join(tokenizer.tokenize(name))
+    name_word_count = len(list(name.split(' ')))
+    name_neutral_sentiment = sentiment.polarity_scores(name)['neu']
+    name_negative_sentiment = sentiment.polarity_scores(name)['neg']
+    name_positive_sentiment = sentiment.polarity_scores(name)['pos']
+    name_compound_sentiment = sentiment.polarity_scores(name)['compound']
+
+    #description text
+    description = description.lower()
+    description = ' '.join(tokenizer.tokenize(description))
+    description_word_count = len(list(description.split(' ')))
+    description_neutral_sentiment = sentiment.polarity_scores(description)['neu']
+    description_negative_sentiment = sentiment.polarity_scores(description)['neg']
+    description_positive_sentiment = sentiment.polarity_scores(description)['pos']
+    description_compound_sentiment = sentiment.polarity_scores(description)['compound']
+
+    #neighborhood_overview text
+    neighborhood_overview = neighborhood_overview.lower()
+    neighborhood_overview = ' '.join(tokenizer.tokenize(neighborhood_overview))
+    neighborhood_overview_word_count = len(list(neighborhood_overview.split(' ')))
+    neighborhood_overview_neutral_sentiment = sentiment.polarity_scores(neighborhood_overview)['neu']
+    neighborhood_overview_negative_sentiment = sentiment.polarity_scores(neighborhood_overview)['neg']
+    neighborhood_overview_positive_sentiment = sentiment.polarity_scores(neighborhood_overview)['pos']
+    neighborhood_overview_compound_sentiment = sentiment.polarity_scores(neighborhood_overview)['compound']
+
+    #host text
+    host_about = host_about.lower()
+    host_about = ' '.join(tokenizer.tokenize(host_about))
+    host_about_word_count = len(list(host_about.split(' ')))
+    host_about_neutral_sentiment = sentiment.polarity_scores(host_about)['neu']
+    host_about_negative_sentiment = sentiment.polarity_scores(host_about)['neg']
+    host_about_positive_sentiment = sentiment.polarity_scores(host_about)['pos']
+    host_about_compound_sentiment = sentiment.polarity_scores(host_about)['compound']
+
+    #mapping values for yes no quesitons
+    yes_no_map = {'Yes':1, 'No':0}
 
     host_is_superhost = st.radio('Are you a super host?',
     ['Yes', 'No'])
+    host_is_superhost = yes_no_map[host_is_superhost]
 
     host_has_profile_pic = st.radio('Do you have a profile picture?',
     ['Yes', 'No'])
+    host_has_profile_pic = yes_no_map[host_has_profile_pic]
 
-    host_identity_verified = st.radio('Is your identity verified?',
+    host_identity_verified = st.radio('Is your identity is verified?',
     ['Yes', 'No'])
+    host_identity_verified = yes_no_map[host_identity_verified]
 
     days_being_host = st.number_input(
         'How many days have you been a host?',
@@ -117,38 +166,72 @@ if page == 'Prediction and Recommendations':
         step= 0.01)
 
     st.write('Please select all emenities that your listing offers:')
+
+    #set up amenities offered
     wifi = st.checkbox('wifi')
+    wifi= int(wifi)
     smoke_alarm	= st.checkbox('smoke alarm')
+    smoke_alarm= int(smoke_alarm)
     essentials	= st.checkbox('essentials')
+    essentials = int(essentials)
     heating	= st.checkbox('heating')
+    heating = int(heating)
     air_conditioning	= st.checkbox('air conditioning')
+    air_conditioning = int(air_conditioning)
     hangers	= st.checkbox('hangers')
+    hangers = int(hangers)
     iron	= st.checkbox('iron')
+    iron = int(iron)
     kitchen	=  st.checkbox('kitchen')
+    kitchen = int(kitchen)
     long_term_stays_allowed	= st.checkbox('long term stays allowed')
+    long_term_stays_allowed = int(long_term_stays_allowed)
     hair_dryer	= st.checkbox('hair dryer')
+    hair_dryer = int(hair_dryer)
     carbon_monoxide_alarm	= st.checkbox('carbon monoxide alarm')
+    carbon_monoxide_alarm = int(carbon_monoxide_alarm)
     hot_water	= st.checkbox('hot water')
+    hot_water = int(hot_water)
     shampoo	= st.checkbox('shampoo')
+    shampoo = int(shampoo)
     dedicated_workspace	= st.checkbox('dedicated workspace')
+    dedicated_workspace = int(dedicated_workspace)
     dishes_and_silverware	= st.checkbox('dishes and silverware')
+    dishes_and_silverware = int(dishes_and_silverware)
     microwave	= st.checkbox('microwave')
+    microwave = int(microwave)
     washer	= st.checkbox('washer')
+    washer = int(washer)
     dryer	= st.checkbox('dryer')
+    dryer = int(dryer)
     fire_extinguisher	= st.checkbox('fire extinguisher')
+    fire_extinguisher = int(fire_extinguisher)
     refrigerator	= st.checkbox('refrigerator')
+    refrigerator = int(refrigerator)
     coffee_maker	= st.checkbox('coffee maker')
+    coffee_maker = int(coffee_maker)
     cooking_basics	= st.checkbox('cooking basics')
+    cooking_basics = int(cooking_basics)
     private_entrance	= st.checkbox('private entrance')
+    private_entrance = int(private_entrance)
     bed_linens	= st.checkbox('bed linens')
+    bed_linens = int(bed_linens)
     stove	= st.checkbox('stove')
+    stove = int(stove)
     oven	= st.checkbox('oven')
+    oven = int(oven)
     free_street_parking	= st.checkbox('free street parking')
+    free_street_parking = int(free_street_parking)
     dishwasher	= st.checkbox('dishwasher')
+    dishwasher = int(dishwasher)
     first_aid_kit	= st.checkbox('first aid kit')
+    first_aid_kit = int(first_aid_kit)
     extra_pillows_and_blankets	= st.checkbox('extra pillows and blankets')
+    extra_pillows_and_blankets = int(extra_pillows_and_blankets)
     tv	= st.checkbox('tv')
+    tv = int(tv)
     patio_or_balcony= st.checkbox('patio or balcony')
+    patio_or_balcony= int(patio_or_balcony)
 
     st.write('Calendar information')
 
@@ -196,8 +279,11 @@ if page == 'Prediction and Recommendations':
         max_value = 365,
         step= 1)
 
-    instant_bookable = st.radio('Is the listing instantly bookable?',
+    instant_bookable = st.radio('Is the listing is instantly bookable?',
     ['Yes', 'No'])
+    instant_bookable = yes_no_map[instant_bookable]
+
+    instant_bookable = int(instant_bookable)
 
     days_since_first_review =st.number_input(
         "How many days has it been since the listing received its first review?",
@@ -208,3 +294,59 @@ if page == 'Prediction and Recommendations':
         "How many days has it been since the listing received its most recent review?",
         min_value = 0,
         step= 1)
+
+    #venue Information
+
+    neighborhood_venues = pickle.load(open('../models/neighborhood_venues.pkl','rb'))
+
+    historic_site = neighborhood_venues.get('historic site',{}).get(neighbourhood_cleansed)
+    museum = neighborhood_venues.get('museum',{}).get(neighbourhood_cleansed)
+    metro = neighborhood_venues.get('metro',{}).get(neighbourhood_cleansed)
+    music_venue	= neighborhood_venues.get('music venue',{}).get(neighbourhood_cleansed)
+    perfomring_arts_venue = neighborhood_venues.get('perfomring arts venue',{}).get(neighbourhood_cleansed)
+    college_and_university	= neighborhood_venues.get('college and university',{}).get(neighbourhood_cleansed)
+    food = neighborhood_venues.get('food',{}).get(neighbourhood_cleansed)
+    nightlife_spot	= neighborhood_venues.get('nightlife spot',{}).get(neighbourhood_cleansed)
+    outdoors_and_recreation	= neighborhood_venues.get('outdoors and recreation',{}).get(neighbourhood_cleansed)
+    government_building	= neighborhood_venues.get('government building',{}).get(neighbourhood_cleansed)
+    clothing_store = neighborhood_venues.get('clothing store',{}).get(neighbourhood_cleansed)
+
+    #sanitize user inputs
+    enc = pickle.load(open('../models/enc.pkl','rb'))
+
+    normal_input = np.array([host_response_rate, host_acceptance_rate,	host_is_superhost,	host_has_profile_pic,
+    	host_identity_verified, accommodates, bathrooms, bedrooms,	beds,	price,	minimum_nights,	maximum_nights,
+        minimum_nights_avg_ntm,	maximum_nights_avg_ntm,	availability_30, availability_60,
+        availability_90, availability_365, instant_bookable, calculated_host_listings_count, historic_site,	museum,
+        metro,	music_venue, perfomring_arts_venue,	college_and_university,	food, nightlife_spot,
+        outdoors_and_recreation, government_building,	clothing_store,	days_being_host, days_since_first_review,
+        days_since_last_review,	name_word_count,	name_neutral_sentiment,	name_negative_sentiment,
+        name_positive_sentiment, name_compound_sentiment,	description_word_count,	description_neutral_sentiment,
+        description_negative_sentiment,	description_positive_sentiment,	description_compound_sentiment,	neighborhood_overview_word_count,
+        neighborhood_overview_neutral_sentiment,	neighborhood_overview_negative_sentiment,	neighborhood_overview_positive_sentiment,
+        neighborhood_overview_compound_sentiment,	host_about_word_count,	host_about_neutral_sentiment,	host_about_negative_sentiment,
+        host_about_positive_sentiment, host_about_compound_sentiment,	wifi,	smoke_alarm, essentials, heating, air_conditioning,
+        hangers, iron,	kitchen, long_term_stays_allowed,	hair_dryer,	carbon_monoxide_alarm,	hot_water,	shampoo,
+        dedicated_workspace,	dishes_and_silverware,	microwave,	washer,	dryer,	fire_extinguisher,	refrigerator,
+        coffee_maker,	cooking_basics,	private_entrance,	bed_linens,	stove,	oven,	free_street_parking,	dishwasher,
+        first_aid_kit,	extra_pillows_and_blankets,	tv,	patio_or_balcony])
+
+    ohe_cats = np.array([host_response_time, neighbourhood_cleansed, room_type]).reshape(1,-1)[0]
+    ohe_cats = enc.transform(ohe_cats.reshape(1,-1))[0]
+
+    user_input = np.hstack([normal_input, ohe_cats])
+
+    #load model
+    et = pickle.load(open('../models/et.pkl','rb'))
+
+    #Make a Prediction
+    pred = []
+
+    pred = et.predict(user_input.reshape(1,-1))
+
+    #click button to generate prediction
+    if st.button('Make popularity prediction'):
+        if pred == [1]:
+            st.write('This lisitng is predicted to be popular on the Washington D.C. Airbnb market.')
+        elif pred == [0]:
+            st.write('This lisitng is not predicted to be one of the most popular on the Washington D.C. Airbnb market.')
