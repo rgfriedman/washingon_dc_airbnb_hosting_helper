@@ -247,13 +247,13 @@ if page == 'Prediction and Recommendations':
 
     minimum_nights_avg_ntm = st.number_input(
         "What's the average minimum number of nights required to stay at this listing looking 365 nights into the future? (full calendar rules may differ)",
-        min_value = 0,
-        step= 1)
+        min_value = 0.0,
+        step= 0.1)
 
     maximum_nights_avg_ntm = st.number_input(
         "What's the average maximum number of nights required to stay at this listing looking 365 nights into the future? (full calendar rules may differ)",
-        min_value = 0,
-        step= 1)
+        min_value = 0.0,
+        step= 0.1)
 
     availability_30	= st.number_input(
         "How many days is this listing currently available to book in the next 30 days?",
@@ -347,6 +347,22 @@ if page == 'Prediction and Recommendations':
     #click button to generate prediction
     if st.button('Make popularity prediction'):
         if pred == [1]:
-            st.write('This lisitng is predicted to be popular on the Washington D.C. Airbnb market.')
+            st.write('Great work! This lisitng is predicted to be popular on the Washington D.C. Airbnb market.')
+            st.write('Here are some recommendations to add to your listing that will help it stay popular:')
+
+            if host_is_superhost ==0:
+                st.write('- Become a super host')
+
+            if hangers == 0:
+                st.write('- Hangers as an amenity')
+
+
         elif pred == [0]:
             st.write('This lisitng is not predicted to be one of the most popular on the Washington D.C. Airbnb market.')
+            st.write('Here are some recommendations to add to your listing to increase its chance of being popular:')
+
+            if host_is_superhost ==0:
+                st.write('- Become a super host')
+
+            if hangers == 0:
+                st.write('- Hangers as an amenity')
