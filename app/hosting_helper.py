@@ -135,7 +135,7 @@ if page == 'Prediction and Recommendations':
         max_value = 1.00)
 
 
-    response_time_list = pickle.load(open('../models/response_time_list.pkl','rb'))
+    response_time_list = pickle.load(open('./models/response_time_list.pkl','rb'))
 
     host_response_time= st.selectbox('What is your response time?',
     sorted(response_time_list))
