@@ -18,11 +18,24 @@ page = st.sidebar.selectbox(
 
 if page == 'About':
 
-    st.write('Summary of project and model')
-    st.write('get in touch with me at:')
+    st.subheader('Background')
+    st.write("Airbnb was started in 2007 and has been disrupting the hospitality industry ever since. Hosts on Airbnb offer unique stays and local experiences for travelers that can't be replicated by a stay in a hotel. According to a recent study by [SmartAsset](https://smartasset.com/mortgage/where-do-airbnb-hosts-make-the-most-money), hosts in major US cities can expect an annual profit of around $20,000 for renting out a two-bedroom apartment after expenses or can expect to pay about 80% of their rent on average from renting out one room in a two-bedroom place. As the popularity of Airbnb continues, it's clear that renting out an entire place or room can be a profitable venture.")
+    st.write("There are a lot of apps out there to help hosts price their listing, but not a lot that look at what helps to make a listing popular in the first place. The goal of this project is to help hosts understand what makes and Airbnb listing the most popular on the DC market and what to focus on to make their listing more competitive and increase their profits.")
+
+
+    st.subheader('App Overview')
+    st.write("My name is Rachael Friedman and I am a data sccientist that has created an app for hosts in DC to use to make their listing as strong as possibe. I used my data science skill set to create predictive models on lisitng popularity in Washington DC. Popularity in these models is defined as a listing having over a 4.8 overall rating and 60 or more reivews. The data used for this project is collected from [Inside Airbnb](http://insideairbnb.com/index.html) and overlayed with DC venue information from the [Foursquare API](https://developer.foursquare.com/).")
+    st.write('This application uses a best predictive model (an Extra Trees Classifier) to predict whether an Airbnb listing in DC will be considered popular or not compared to the current listing competition. It also uses a best interpretive mode (Logistic Regression) to help hosts understand what features they could improve on their listing to increase popularity.')
+
+    st.write('It is recommended that hosts use this application to generate a prediction on whether or not their listing will be considered popular on the DC Airbnb market given its features and also take the suggestions on what to add to a listing to increase popoularity.')
+
+    st.subheader('More Information')
+    st.write('Check out the project GitHub repo for more information at [DC Hosting Helper](https://github.com/rgfriedman/Airbnb_listings_capstone).')
+    st.write('You can also get in touch with me at [my page](https://rgfriedman.github.io/).')
+
 
 if page == 'Prediction and Recommendations':
-    st.write('Input information below about your current listing to generate a prediction and recommendations.')
+    st.write('Input information below about your current listing to generate a prediction and recommendations. Please fill out as many fields as possible.')
 
     st.write('Listing overview')
 
@@ -351,7 +364,7 @@ if page == 'Prediction and Recommendations':
             st.write('Here are some recommendations to add to your listing that will help it stay popular:')
 
             if instant_bookable==0:
-                st.write('- Add listing as instantly bookable')
+                st.write('- Make listing instantly bookable')
 
             if host_is_superhost ==0:
                 st.write('- Become a super host')
@@ -365,35 +378,35 @@ if page == 'Prediction and Recommendations':
             if host_acceptance_rate<.7:
                 st.write('- Increase your acceptance rate for guests')
 
-            if host_about_word_count==0:
+            if host_about_word_count<2:
                 st.write('- Add a host about section')
 
-            if (host_about_word_count >0) & (host_about_positive_sentiment< 0.03):
+            if (host_about_word_count >1) & (host_about_positive_sentiment< 0.03):
                 st.write('- Add more positive language to your about the host section')
 
-            if (host_about_word_count>0) & (host_about_neutral_sentiment<.4):
+            if (host_about_word_count>1) & (host_about_neutral_sentiment<.4):
                 st.write('- Add more neutral language to your about the host section')
 
-            if description_word_count==0:
+            if description_word_count<2:
                 st.write('- Add a listing description')
 
-            if (description_word_count>0) & (description_neutral_sentiment<.4):
+            if (description_word_count>1) & (description_neutral_sentiment<.4):
                 st.write('- Add more neutral language to your listing description')
 
-            if (description_word_count>0) & (description_positive_sentiment<0.03):
+            if (description_word_count>1) & (description_positive_sentiment<0.03):
                 st.write('- Add more positive language to your listing description')
 
-            if neighborhood_overview_word_count==0:
+            if neighborhood_overview_word_count<2:
                 st.write('- Add a neighborhood overview section')
 
-            if (neighborhood_overview_word_count>0) & (neighborhood_overview_positive_sentiment<0.03):
+            if (neighborhood_overview_word_count>1) & (neighborhood_overview_positive_sentiment<0.03):
                 st.write('- Add more positive language to your neighborhood overview section')
 
-            if name_word_count==0:
+            if name_word_count<2:
                 st.write('- Add a listing name')
 
-            if (name_word_count>0) & ( name_word_count<0.03):
-                st.write('- Add more positive language to your listing description')
+            if (name_word_count>1) & ( name_positive_sentiment<0.03):
+                st.write('- Add more positive language to your listing name')
 
             if dishes_and_silverware==0:
                 st.write('- Add dishses and silverware as an amenity')
@@ -438,19 +451,13 @@ if page == 'Prediction and Recommendations':
                 st.write('- Add a coffee maker as an amenity')
 
             if free_street_parking==0:
-                st.write('- Add a free street parking as an amenity')
+                st.write('- Add a free parking as an amenity')
 
             if dishwasher==0:
                 st.write('- Add a dishwasher  as an amenity')
 
             if wifi==0:
                 st.write('- Add a wifi as an amenity')
-
-            if patio_or_balcony==0:
-                st.write('- Add patio or balcony as an amenity when applicable')
-
-            if private_entrance==0:
-                st.write('- Add a private entrance as an amenity when applicable')
 
 
         elif pred == [0]:
@@ -458,7 +465,7 @@ if page == 'Prediction and Recommendations':
             st.write('Here are some recommendations to add to your listing to increase its chance of being popular:')
 
             if instant_bookable==0:
-                st.write('- Add listing as instantly bookable')
+                st.write('- Make listing instantly bookable')
 
             if host_is_superhost ==0:
                 st.write('- Become a super host')
@@ -472,35 +479,35 @@ if page == 'Prediction and Recommendations':
             if host_acceptance_rate<.7:
                 st.write('- Increase your acceptance rate for guests')
 
-            if host_about_word_count==0:
+            if host_about_word_count<2:
                 st.write('- Add a host about section')
 
-            if (host_about_word_count >0) & (host_about_positive_sentiment< 0.03):
+            if (host_about_word_count >1) & (host_about_positive_sentiment< 0.03):
                 st.write('- Add more positive language to your about the host section')
 
-            if (host_about_word_count>0) & (host_about_neutral_sentiment<.4):
+            if (host_about_word_count>1) & (host_about_neutral_sentiment<.4):
                 st.write('- Add more neutral language to your about the host section')
 
-            if description_word_count==0:
+            if description_word_count<2:
                 st.write('- Add a listing description')
 
-            if (description_word_count>0) & (description_neutral_sentiment<.4):
+            if (description_word_count>1) & (description_neutral_sentiment<.4):
                 st.write('- Add more neutral language to your listing description')
 
-            if (description_word_count>0) & (description_positive_sentiment<0.03):
+            if (description_word_count>1) & (description_positive_sentiment<0.03):
                 st.write('- Add more positive language to your listing description')
 
-            if neighborhood_overview_word_count==0:
+            if neighborhood_overview_word_count<2:
                 st.write('- Add a neighborhood overview section')
 
-            if (neighborhood_overview_word_count>0) & (neighborhood_overview_positive_sentiment<0.03):
+            if (neighborhood_overview_word_count>1) & (neighborhood_overview_positive_sentiment<0.03):
                 st.write('- Add more positive language to your neighborhood overview section')
 
-            if name_word_count==0:
+            if name_word_count<2:
                 st.write('- Add a listing name')
 
-            if (name_word_count>0) & ( name_word_count<0.03):
-                st.write('- Add more positive language to your listing description')
+            if (name_word_count>1) & ( name_positive_sentiment<0.03):
+                st.write('- Add more positive language to your listing name')
 
             if dishes_and_silverware==0:
                 st.write('- Add dishses and silverware as an amenity')
@@ -545,7 +552,7 @@ if page == 'Prediction and Recommendations':
                 st.write('- Add a coffee maker as an amenity')
 
             if free_street_parking==0:
-                st.write('- Add a free street parking as an amenity')
+                st.write('- Add a free parking as an amenity')
 
             if dishwasher==0:
                 st.write('- Add a dishwasher  as an amenity')
@@ -553,10 +560,4 @@ if page == 'Prediction and Recommendations':
             if wifi==0:
                 st.write('- Add a wifi as an amenity')
 
-            if patio_or_balcony==0:
-                st.write('- Add patio or balcony as an amenity when applicable')
-
-            if private_entrance==0:
-                st.write('- Add a private entrance as an amenity when applicable')
-
-            st.write('Also keep in mind that the the longer the listing is on the market can also help the listing to become popular. ')
+            st.write('Also keep in mind that more bookings and reviews over time will help the listing to become popular. ')
