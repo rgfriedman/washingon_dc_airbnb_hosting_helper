@@ -4,7 +4,9 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import ExtraTreesClassifier
 from nltk.corpus import stopwords
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
+#from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import nltk
+nltk.download('vader_lexicon')
 from nltk.tokenize import RegexpTokenizer
 
 
