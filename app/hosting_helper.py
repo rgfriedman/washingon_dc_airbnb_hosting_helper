@@ -1,12 +1,12 @@
-import os
 import streamlit as st
 import pickle
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import ExtraTreesClassifier
+import os
+os.system("../nltk_download_utils.py")
+#import os
 #os.system('python -m nltk.downloader vader_lexicon')
-import nltk
-nltk.download('vader_lexicon')
 #from nltk.corpus import stopwords
 #from nltk.sentiment.vader import SentimentIntensityAnalyzer
 #from nltk.tokenize import RegexpTokenizer
