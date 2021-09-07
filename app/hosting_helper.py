@@ -4,7 +4,9 @@ import pickle
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import ExtraTreesClassifier
-os.system('python -m nltk.downloader vader_lexicon')
+#os.system('python -m nltk.downloader vader_lexicon')
+import nltk
+nltk.download('vader_lexicon')
 from nltk.corpus import stopwords
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.tokenize import RegexpTokenizer
