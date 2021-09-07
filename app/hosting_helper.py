@@ -7,9 +7,9 @@ from sklearn.ensemble import ExtraTreesClassifier
 #os.system('python -m nltk.downloader vader_lexicon')
 import nltk
 nltk.download('vader_lexicon')
-from nltk.corpus import stopwords
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-from nltk.tokenize import RegexpTokenizer
+#from nltk.corpus import stopwords
+#from nltk.sentiment.vader import SentimentIntensityAnalyzer
+#from nltk.tokenize import RegexpTokenizer
 
 
 st.title('Washington D.C. Airbnb Hositing Helper')
