@@ -5,9 +5,9 @@ import pandas as pd
 from sklearn.ensemble import ExtraTreesClassifier
 import os
 os.system('python -m nltk.downloader all')
-#from nltk.corpus import stopwords
-#from nltk.sentiment.vader import SentimentIntensityAnalyzer
-#from nltk.tokenize import RegexpTokenizer
+from nltk.corpus import stopwords
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from nltk.tokenize import RegexpTokenizer
 
 
 st.title('Washington D.C. Airbnb Hositing Helper')
