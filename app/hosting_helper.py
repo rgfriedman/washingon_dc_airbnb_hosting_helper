@@ -350,19 +350,213 @@ if page == 'Prediction and Recommendations':
             st.write('Great work! This lisitng is predicted to be popular on the Washington D.C. Airbnb market.')
             st.write('Here are some recommendations to add to your listing that will help it stay popular:')
 
+            if instant_bookable==0:
+                st.write('- Add listing as instantly bookable')
+
             if host_is_superhost ==0:
                 st.write('- Become a super host')
 
+            if host_has_profile_pic==0:
+                st.write('- Add a profile picture')
+
+            if host_identity_verified==0:
+                st.write('- Verify your identity on Airbnb')
+
+            if host_acceptance_rate<.7:
+                st.write('- Increase your acceptance rate for guests')
+
+            if host_about_word_count==0:
+                st.write('- Add a host about section')
+
+            if (host_about_word_count >0) & (host_about_positive_sentiment< 0.03):
+                st.write('- Add more positive language to your about the host section')
+
+            if (host_about_word_count>0) & (host_about_neutral_sentiment<.4):
+                st.write('- Add more neutral language to your about the host section')
+
+            if description_word_count==0:
+                st.write('- Add a listing description')
+
+            if (description_word_count>0) & (description_neutral_sentiment<.4):
+                st.write('- Add more neutral language to your listing description')
+
+            if (description_word_count>0) & (description_positive_sentiment<0.03):
+                st.write('- Add more positive language to your listing description')
+
+            if neighborhood_overview_word_count==0:
+                st.write('- Add a neighborhood overview section')
+
+            if (neighborhood_overview_word_count>0) & (neighborhood_overview_positive_sentiment<0.03):
+                st.write('- Add more positive language to your neighborhood overview section')
+
+            if name_word_count==0:
+                st.write('- Add a listing name')
+
+            if (name_word_count>0) & ( name_word_count<0.03):
+                st.write('- Add more positive language to your listing description')
+
+            if dishes_and_silverware==0:
+                st.write('- Add dishses and silverware as an amenity')
+
+            if smoke_alarm==0:
+                st.write('- Add a smoke alarm as an amenity')
+
+            if hair_dryer==0:
+                st.write('- Add a hair dryer as an amenity')
+
+            if carbon_monoxide_alarm==0:
+                st.write('- Add a carbon monoxide alarm as an amenity')
+
+            if iron ==0:
+                st.write('- Add an iron as an amenity')
+
             if hangers == 0:
-                st.write('- Hangers as an amenity')
+                st.write('- Add hangers as an amenity')
+
+            if first_aid_kit==0:
+                st.write('- Add a first aid kit as an amenity')
+
+            if stove==0:
+                st.write('- Add a stove as an amenity')
+
+            if hot_water==0:
+                st.write('- Add hot water as an amenity')
+
+            if dedicated_workspace==0:
+                st.write('- Add a dedicated workspace as an amenity')
+
+            if bed_linens==0:
+                st.write('- Add bed linens as an amenity')
+
+            if refrigerator==0:
+                st.write('- Add a refrigerator as an amenity')
+
+            if shampoo==0:
+                st.write('- Add a shampoo as an amenity')
+
+            if coffee_maker==0:
+                st.write('- Add a coffee maker as an amenity')
+
+            if free_street_parking==0:
+                st.write('- Add a free street parking as an amenity')
+
+            if dishwasher==0:
+                st.write('- Add a dishwasher  as an amenity')
+
+            if wifi==0:
+                st.write('- Add a wifi as an amenity')
+
+            if patio_or_balcony==0:
+                st.write('- Add patio or balcony as an amenity when applicable')
+
+            if private_entrance==0:
+                st.write('- Add a private entrance as an amenity when applicable')
 
 
         elif pred == [0]:
             st.write('This lisitng is not predicted to be one of the most popular on the Washington D.C. Airbnb market.')
             st.write('Here are some recommendations to add to your listing to increase its chance of being popular:')
 
+            if instant_bookable==0:
+                st.write('- Add listing as instantly bookable')
+
             if host_is_superhost ==0:
                 st.write('- Become a super host')
 
+            if host_has_profile_pic==0:
+                st.write('- Add a profile picture')
+
+            if host_identity_verified==0:
+                st.write('- Verify your identity on Airbnb')
+
+            if host_acceptance_rate<.7:
+                st.write('- Increase your acceptance rate for guests')
+
+            if host_about_word_count==0:
+                st.write('- Add a host about section')
+
+            if (host_about_word_count >0) & (host_about_positive_sentiment< 0.03):
+                st.write('- Add more positive language to your about the host section')
+
+            if (host_about_word_count>0) & (host_about_neutral_sentiment<.4):
+                st.write('- Add more neutral language to your about the host section')
+
+            if description_word_count==0:
+                st.write('- Add a listing description')
+
+            if (description_word_count>0) & (description_neutral_sentiment<.4):
+                st.write('- Add more neutral language to your listing description')
+
+            if (description_word_count>0) & (description_positive_sentiment<0.03):
+                st.write('- Add more positive language to your listing description')
+
+            if neighborhood_overview_word_count==0:
+                st.write('- Add a neighborhood overview section')
+
+            if (neighborhood_overview_word_count>0) & (neighborhood_overview_positive_sentiment<0.03):
+                st.write('- Add more positive language to your neighborhood overview section')
+
+            if name_word_count==0:
+                st.write('- Add a listing name')
+
+            if (name_word_count>0) & ( name_word_count<0.03):
+                st.write('- Add more positive language to your listing description')
+
+            if dishes_and_silverware==0:
+                st.write('- Add dishses and silverware as an amenity')
+
+            if smoke_alarm==0:
+                st.write('- Add a smoke alarm as an amenity')
+
+            if hair_dryer==0:
+                st.write('- Add a hair dryer as an amenity')
+
+            if carbon_monoxide_alarm==0:
+                st.write('- Add a carbon monoxide alarm as an amenity')
+
+            if iron ==0:
+                st.write('- Add an iron as an amenity')
+
             if hangers == 0:
-                st.write('- Hangers as an amenity')
+                st.write('- Add hangers as an amenity')
+
+            if first_aid_kit==0:
+                st.write('- Add a first aid kit as an amenity')
+
+            if stove==0:
+                st.write('- Add a stove as an amenity')
+
+            if hot_water==0:
+                st.write('- Add hot water as an amenity')
+
+            if dedicated_workspace==0:
+                st.write('- Add a dedicated workspace as an amenity')
+
+            if bed_linens==0:
+                st.write('- Add bed linens as an amenity')
+
+            if refrigerator==0:
+                st.write('- Add a refrigerator as an amenity')
+
+            if shampoo==0:
+                st.write('- Add a shampoo as an amenity')
+
+            if coffee_maker==0:
+                st.write('- Add a coffee maker as an amenity')
+
+            if free_street_parking==0:
+                st.write('- Add a free street parking as an amenity')
+
+            if dishwasher==0:
+                st.write('- Add a dishwasher  as an amenity')
+
+            if wifi==0:
+                st.write('- Add a wifi as an amenity')
+
+            if patio_or_balcony==0:
+                st.write('- Add patio or balcony as an amenity when applicable')
+
+            if private_entrance==0:
+                st.write('- Add a private entrance as an amenity when applicable')
+
+            st.write('Also keep in mind that the the longer the listing is on the market can also help the listing to become popular. ')
