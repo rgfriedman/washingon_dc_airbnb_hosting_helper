@@ -1,11 +1,14 @@
+import os
 import streamlit as st
 import pickle
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import ExtraTreesClassifier
+os.system('python -m nltk.downloader all')
 from nltk.corpus import stopwords
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.tokenize import RegexpTokenizer
+
 
 st.title('Washington D.C. Airbnb Hositing Helper')
 st.write('Use this app to predict if your Airbnb listing will be one of the most popular listings in the current Washington D.C. market and get recommendations on how to increase its popularity.')
