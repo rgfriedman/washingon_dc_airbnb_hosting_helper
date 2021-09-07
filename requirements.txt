@@ -3,5 +3,3 @@ numpy
 pandas
 sklearn
 nltk
-import nltk
-nltk.download('vader_lexicon')
