@@ -10,7 +10,7 @@ from nltk.tokenize import RegexpTokenizer
 st.title('Washington D.C. Airbnb Hositing Helper')
 st.write('Use this app to predict if your Airbnb listing will be one of the most popular listings in the current Washington D.C. market and get recommendations on how to increase its popularity.')
 
-st.image('./dc.jpg', caption='Photo by Andy He on Unsplash')
+st.image('./app/dc.jpg', caption='Photo by Andy He on Unsplash')
 
 page = st.sidebar.selectbox(
     'Select a page:',
