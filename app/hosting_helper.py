@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import ExtraTreesClassifier
 import os
-os.system("../nltk_download_utils.py")
+os.system("./nltk_download_utils.py")
 #import os
 #os.system('python -m nltk.downloader vader_lexicon')
 #from nltk.corpus import stopwords
