@@ -142,12 +142,12 @@ if page == 'Prediction and Recommendations':
 
     st.write('Listing details')
 
-    neighborhood_list = pickle.load(open('../models/neighborhood_list.pkl','rb'))
+    neighborhood_list = pickle.load(open('./models/neighborhood_list.pkl','rb'))
 
     neighbourhood_cleansed = st.selectbox('Select the neighborhood where your listing is located:',
         sorted(neighborhood_list))
 
-    room_type_list = pickle.load(open('../models/room_type_list.pkl','rb'))
+    room_type_list = pickle.load(open('./models/room_type_list.pkl','rb'))
 
     room_type = st.selectbox('Select the type of listing:',
         sorted(room_type_list))
@@ -313,7 +313,7 @@ if page == 'Prediction and Recommendations':
 
     #venue Information
 
-    neighborhood_venues = pickle.load(open('../models/neighborhood_venues.pkl','rb'))
+    neighborhood_venues = pickle.load(open('./models/neighborhood_venues.pkl','rb'))
 
     historic_site = neighborhood_venues.get('historic site',{}).get(neighbourhood_cleansed)
     museum = neighborhood_venues.get('museum',{}).get(neighbourhood_cleansed)
@@ -328,7 +328,7 @@ if page == 'Prediction and Recommendations':
     clothing_store = neighborhood_venues.get('clothing store',{}).get(neighbourhood_cleansed)
 
     #sanitize user inputs
-    enc = pickle.load(open('../models/enc.pkl','rb'))
+    enc = pickle.load(open('./models/enc.pkl','rb'))
 
     normal_input = np.array([host_response_rate, host_acceptance_rate,	host_is_superhost,	host_has_profile_pic,
     	host_identity_verified, accommodates, bathrooms, bedrooms,	beds,	price,	minimum_nights,	maximum_nights,
@@ -353,7 +353,7 @@ if page == 'Prediction and Recommendations':
     user_input = np.hstack([normal_input, ohe_cats])
 
     #load model
-    et = pickle.load(open('../models/et.pkl','rb'))
+    et = pickle.load(open('./models/et.pkl','rb'))
 
     #Make a Prediction
     pred = []
