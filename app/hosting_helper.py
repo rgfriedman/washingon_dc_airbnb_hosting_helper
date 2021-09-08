@@ -8,6 +8,7 @@ import nltk
 nltk.download('vader_lexicon')
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.tokenize import RegexpTokenizer
+import plotly.figure_factory as ff
 
 #title and info for whole app
 st.title('Washington DC Airbnb Hosting Helper')
@@ -565,3 +566,20 @@ if page == 'About':
     st.subheader('More Information')
     st.write('Check out the project GitHub repo for more information at [DC Hosting Helper](https://github.com/rgfriedman/Airbnb_listings_capstone).')
     st.write('You can also get in touch with me at [my page](https://rgfriedman.github.io/).')
+
+
+if page == 'Explore DC Airbnb Data':
+
+    amens = pickle.load(open('./models/amens.pkl','rb'))
+
+    df = amens
+    fig = px.histogram(df, x= 'popular',y=['wifi', 'smoke_alarm', 'essentials', 'heating', 'air_conditioning',
+           'hangers', 'iron', 'kitchen', 'long_term_stays_allowed', 'hair_dryer',
+           'carbon_monoxide_alarm', 'hot_water', 'shampoo', 'dedicated_workspace',
+           'dishes_and_silverware', 'microwave', 'washer', 'dryer',
+           'fire_extinguisher', 'refrigerator', 'coffee_maker', 'cooking_basics',
+           'private_entrance', 'bed_linens', 'stove', 'oven',
+           'free_street_parking', 'dishwasher', 'first_aid_kit',
+           'extra_pillows_and_blankets', 'tv', 'patio_or_balcony'] )
+    fig.update_layout(barmode='group')
+    st.ploty_chart(fig, use_container_width=True)
