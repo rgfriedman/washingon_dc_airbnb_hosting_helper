@@ -8,7 +8,7 @@ import nltk
 nltk.download('vader_lexicon')
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.tokenize import RegexpTokenizer
-import plotly.figure_factory as ff
+import plotly.express as px
 
 #title and info for whole app
 st.title('Washington DC Airbnb Hosting Helper')
