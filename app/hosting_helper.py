@@ -570,6 +570,8 @@ if page == 'About':
 
 if page == 'Explore DC Airbnb Data':
 
+    st.write("Learn more about DC listing data using the interactive charts below.")
+
     amens = pickle.load(open('./models/amens.pkl','rb'))
 
     df = amens
@@ -581,5 +583,5 @@ if page == 'Explore DC Airbnb Data':
            'private_entrance', 'bed_linens', 'stove', 'oven',
            'free_street_parking', 'dishwasher', 'first_aid_kit',
            'extra_pillows_and_blankets', 'tv', 'patio_or_balcony'] )
-    fig.update_layout(barmode='group')
+    fig.update_layout(barmode='group', title='Amenities by Listing Popularity')
     st.plotly_chart(fig)
