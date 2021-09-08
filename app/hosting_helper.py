@@ -582,4 +582,4 @@ if page == 'Explore DC Airbnb Data':
            'free_street_parking', 'dishwasher', 'first_aid_kit',
            'extra_pillows_and_blankets', 'tv', 'patio_or_balcony'] )
     fig.update_layout(barmode='group')
-    st.ploty_chart(fig)
+    st.plotly_chart(fig)
