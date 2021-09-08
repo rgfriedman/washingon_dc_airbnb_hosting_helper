@@ -617,3 +617,22 @@ if page == 'Explore DC Airbnb Data':
     fig.update_traces(visible='legendonly', selector=dict(type='bar'))
 
     st.plotly_chart(fig)
+
+    neighborhood_chart = pickle.load(open('./models/neighborhood_chart.pkl','rb'))
+
+    fig1 = go.Figure(data=[
+        go.Bar(name='historic_site', x=neighborhood_chart.index, y=neighborhood_chart['historic_site']),
+        go.Bar(name='museum', x=neighborhood_chart.index, y=neighborhood_chart['museum']),
+        go.Bar(name='metro', x=neighborhood_chart.index, y=neighborhood_chart['metro']),
+        go.Bar(name='music_venue', x=neighborhood_chart.index, y=neighborhood_chart['music_venue']),
+        go.Bar(name='perfomring_arts_venue', x=neighborhood_chart.index, y=neighborhood_chart['perfomring_arts_venue']),
+        go.Bar(name='college_and_university', x=neighborhood_chart.index, y=neighborhood_chart['college_and_university']),
+        go.Bar(name='government_building', x=neighborhood_chart.index, y=neighborhood_chart['government_building']),
+        go.Bar(name='clothing_store', x=neighborhood_chart.index, y=neighborhood_chart['clothing_store'])
+
+    ])
+    # Change the bar mode
+    fig1.update_layout(barmode='group',  title='Count of Venues by Neighborhood')
+    fig1.update_traces(visible='legendonly', selector=dict(type='bar'))
+
+    st.plotly_chart(fig1)
