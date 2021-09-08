@@ -9,6 +9,7 @@ nltk.download('vader_lexicon')
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.tokenize import RegexpTokenizer
 import plotly.express as px
+import plotly.graph_objects as go
 
 #title and info for whole app
 st.title('Washington DC Airbnb Hosting Helper')
@@ -574,14 +575,45 @@ if page == 'Explore DC Airbnb Data':
 
     amens = pickle.load(open('./models/amens.pkl','rb'))
 
-    df = amens
-    fig = px.histogram(df, x= 'popular',y=['wifi', 'smoke_alarm', 'essentials', 'heating', 'air_conditioning',
-           'hangers', 'iron', 'kitchen', 'long_term_stays_allowed', 'hair_dryer',
-           'carbon_monoxide_alarm', 'hot_water', 'shampoo', 'dedicated_workspace',
-           'dishes_and_silverware', 'microwave', 'washer', 'dryer',
-           'fire_extinguisher', 'refrigerator', 'coffee_maker', 'cooking_basics',
-           'private_entrance', 'bed_linens', 'stove', 'oven',
-           'free_street_parking', 'dishwasher', 'first_aid_kit',
-           'extra_pillows_and_blankets', 'tv', 'patio_or_balcony'] )
-    fig.update_layout(barmode='group', title='Amenities by Listing Popularity')
+    popular=amens['popular'].map({0:'Not Popular', 1:'Popular'})
+
+    fig = go.Figure(data=[
+        go.Bar(name='wifi', x=popular, y=amens[amens['wifi']==1]['popular'].value_counts()),
+        go.Bar(name='smoke_alarm', x=popular, y=amens[amens['smoke_alarm']==1]['popular'].value_counts()),
+        go.Bar(name='essentials', x=popular, y=amens[amens['essentials']==1]['popular'].value_counts()),
+        go.Bar(name='heating', x=popular, y=amens[amens['heating']==1]['popular'].value_counts()),
+        go.Bar(name='air_conditioning', x=popular, y=amens[amens['air_conditioning']==1]['popular'].value_counts()),
+        go.Bar(name='hangers', x=popular, y=amens[amens['hangers']==1]['popular'].value_counts()),
+        go.Bar(name='iron', x=popular, y=amens[amens['iron']==1]['popular'].value_counts()),
+        go.Bar(name='kitchen', x=popular, y=amens[amens['kitchen']==1]['popular'].value_counts()),
+        go.Bar(name='long_term_stays_allowed', x=popular, y=amens[amens['long_term_stays_allowed']==1]['popular'].value_counts()),
+        go.Bar(name='hair_dryer', x=popular, y=amens[amens['hair_dryer']==1]['popular'].value_counts()),
+        go.Bar(name='carbon_monoxide_alarm', x=popular, y=amens[amens['carbon_monoxide_alarm']==1]['popular'].value_counts()),
+        go.Bar(name='hot_water', x=popular, y=amens[amens['hot_water']==1]['popular'].value_counts()),
+        go.Bar(name='shampoo', x=popular, y=amens[amens['shampoo']==1]['popular'].value_counts()),
+        go.Bar(name='dedicated_workspace', x=popular, y=amens[amens['dedicated_workspace']==1]['popular'].value_counts()),
+        go.Bar(name='dishes_and_silverware', x=popular, y=amens[amens['dishes_and_silverware']==1]['popular'].value_counts()),
+        go.Bar(name='microwave', x=popular, y=amens[amens['microwave']==1]['popular'].value_counts()),
+        go.Bar(name='washer', x=popular, y=amens[amens['washer']==1]['popular'].value_counts()),
+        go.Bar(name='dryer', x=popular, y=amens[amens['dryer']==1]['popular'].value_counts()),
+        go.Bar(name='fire_extinguisher', x=popular, y=amens[amens['fire_extinguisher']==1]['popular'].value_counts()),
+        go.Bar(name='refrigerator', x=popular, y=amens[amens['refrigerator']==1]['popular'].value_counts()),
+        go.Bar(name='coffee_maker', x=popular, y=amens[amens['coffee_maker']==1]['popular'].value_counts()),
+        go.Bar(name='cooking_basics', x=popular, y=amens[amens['cooking_basics']==1]['popular'].value_counts()),
+        go.Bar(name='private_entrance', x=popular, y=amens[amens['private_entrance']==1]['popular'].value_counts()),
+        go.Bar(name='bed_linens', x=popular, y=amens[amens['bed_linens']==1]['popular'].value_counts()),
+        go.Bar(name='stove', x=popular, y=amens[amens['stove']==1]['popular'].value_counts()),
+        go.Bar(name='oven', x=popular, y=amens[amens['oven']==1]['popular'].value_counts()),
+        go.Bar(name='free_street_parking', x=popular, y=amens[amens['free_street_parking']==1]['popular'].value_counts()),
+        go.Bar(name='dishwasher', x=popular, y=amens[amens['dishwasher']==1]['popular'].value_counts()),
+        go.Bar(name='first_aid_kit', x=popular, y=amens[amens['first_aid_kit']==1]['popular'].value_counts()),
+        go.Bar(name='extra_pillows_and_blankets', x=popular, y=amens[amens['extra_pillows_and_blankets']==1]['popular'].value_counts()),
+        go.Bar(name='tv', x=popular, y=amens[amens['tv']==1]['popular'].value_counts()),
+        go.Bar(name='patio_or_balcony', x=popular, y=amens[amens['patio_or_balcony']==1]['popular'].value_counts()),
+
+    ])
+    # Change the bar mode
+    fig.update_layout(barmode='group',   xaxis_type = 'category', title='Count of Amenities by Popularity')
+    fig.update_traces(visible='legendonly', selector=dict(type='bar'))
+
     st.plotly_chart(fig)
