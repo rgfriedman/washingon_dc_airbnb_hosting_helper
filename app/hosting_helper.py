@@ -565,5 +565,3 @@ if page == 'About':
     st.subheader('More Information')
     st.write('Check out the project GitHub repo for more information at [DC Hosting Helper](https://github.com/rgfriedman/Airbnb_listings_capstone).')
     st.write('You can also get in touch with me at [my page](https://rgfriedman.github.io/).')
-
-if page =='Explore DC Airbnb Data':
