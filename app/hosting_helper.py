@@ -9,33 +9,16 @@ nltk.download('vader_lexicon')
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.tokenize import RegexpTokenizer
 
-
-st.title('Washington D.C. Airbnb Hositing Helper')
-st.write('Use this app to predict if your Airbnb listing will be one of the most popular listings in the current Washington D.C. market and get recommendations on how to increase its popularity.')
+#title and info for whole app
+st.title('Washington DC Airbnb Hosting Helper')
+st.write('Use this app to predict if your Airbnb listing will be one of the most popular listings in the current Washington DC market and get recommendations on how to increase its popularity.')
 
 st.image('./app/dc.jpg', caption='Photo by Andy He on Unsplash')
 
+#set app pages
 page = st.sidebar.selectbox(
     'Select a page:',
-    ('About', 'Prediction and Recommendations', 'Explore D.C. Airbnb Data'))
-
-if page == 'About':
-
-    st.subheader('Background')
-    st.write("Airbnb was started in 2007 and has been disrupting the hospitality industry ever since. Hosts on Airbnb offer unique stays and local experiences for travelers that can't be replicated by a stay in a hotel. According to a recent study by [SmartAsset](https://smartasset.com/mortgage/where-do-airbnb-hosts-make-the-most-money), hosts in major US cities can expect an annual profit of around $20,000 for renting out a two-bedroom apartment after expenses or can expect to pay about 80% of their rent on average from renting out one room in a two-bedroom place. As the popularity of Airbnb continues, it's clear that renting out an entire place or room can be a profitable venture.")
-    st.write("There are a lot of apps out there to help hosts price their listing, but not a lot that look at what helps to make a listing popular in the first place. The goal of this project is to help hosts understand what makes and Airbnb listing the most popular on the DC market and what to focus on to make their listing more competitive and increase their profits.")
-
-
-    st.subheader('App Overview')
-    st.write("My name is Rachael Friedman and I am a data sccientist that has created an app for hosts in DC to use to make their listing as strong as possibe. I used my data science skill set to create predictive models on lisitng popularity in Washington DC. Popularity in these models is defined as a listing having over a 4.8 overall rating and 60 or more reivews. The data used for this project is collected from [Inside Airbnb](http://insideairbnb.com/index.html) and overlayed with DC venue information from the [Foursquare API](https://developer.foursquare.com/).")
-    st.write('This application uses a best predictive model (an Extra Trees Classifier) to predict whether an Airbnb listing in DC will be considered popular or not compared to the current listing competition. It also uses a best interpretive mode (Logistic Regression) to help hosts understand what features they could improve on their listing to increase popularity.')
-
-    st.write('It is recommended that hosts use this application to generate a prediction on whether or not their listing will be considered popular on the DC Airbnb market given its features and also take the suggestions on what to add to a listing to increase popoularity.')
-
-    st.subheader('More Information')
-    st.write('Check out the project GitHub repo for more information at [DC Hosting Helper](https://github.com/rgfriedman/Airbnb_listings_capstone).')
-    st.write('You can also get in touch with me at [my page](https://rgfriedman.github.io/).')
-
+    ('Prediction and Recommendations', 'About', 'Explore DC Airbnb Data'))
 
 if page == 'Prediction and Recommendations':
     st.write('Input information below about your current listing to generate a prediction and recommendations. Please fill out as many fields as possible.')
@@ -183,7 +166,7 @@ if page == 'Prediction and Recommendations':
 
     st.write('Please select all emenities that your listing offers:')
 
-    #set up amenities offered
+    #set up amenities offered, change input into int
     wifi = st.checkbox('wifi')
     wifi= int(wifi)
     smoke_alarm	= st.checkbox('smoke alarm')
@@ -328,6 +311,8 @@ if page == 'Prediction and Recommendations':
     clothing_store = neighborhood_venues.get('clothing store',{}).get(neighbourhood_cleansed)
 
     #sanitize user inputs
+
+    #load one hot encoder
     enc = pickle.load(open('./models/enc.pkl','rb'))
 
     normal_input = np.array([host_response_rate, host_acceptance_rate,	host_is_superhost,	host_has_profile_pic,
@@ -347,9 +332,11 @@ if page == 'Prediction and Recommendations':
         coffee_maker,	cooking_basics,	private_entrance,	bed_linens,	stove,	oven,	free_street_parking,	dishwasher,
         first_aid_kit,	extra_pillows_and_blankets,	tv,	patio_or_balcony])
 
+    #use one hot encoder on categorical varialbes
     ohe_cats = np.array([host_response_time, neighbourhood_cleansed, room_type]).reshape(1,-1)[0]
     ohe_cats = enc.transform(ohe_cats.reshape(1,-1))[0]
 
+    #combine user input into one
     user_input = np.hstack([normal_input, ohe_cats])
 
     #load model
@@ -360,10 +347,10 @@ if page == 'Prediction and Recommendations':
 
     pred = et.predict(user_input.reshape(1,-1))
 
-    #click button to generate prediction
+    #click button to generate prediction and recommendations
     if st.button('Make popularity prediction'):
         if pred == [1]:
-            st.write('Great work! This lisitng is predicted to be popular on the Washington D.C. Airbnb market.')
+            st.write('Great work! This lisitng is predicted to be popular on the Washington DC Airbnb market.')
             st.write('Here are some recommendations to add to your listing that will help it stay popular:')
 
             if instant_bookable==0:
@@ -464,7 +451,7 @@ if page == 'Prediction and Recommendations':
 
 
         elif pred == [0]:
-            st.write('This lisitng is not predicted to be one of the most popular on the Washington D.C. Airbnb market.')
+            st.write('This lisitng is not predicted to be one of the most popular on the Washington DC Airbnb market.')
             st.write('Here are some recommendations to add to your listing to increase its chance of being popular:')
 
             if instant_bookable==0:
@@ -564,3 +551,19 @@ if page == 'Prediction and Recommendations':
                 st.write('- Add a wifi as an amenity')
 
             st.write('Also keep in mind that more bookings and reviews over time will help the listing to become popular. ')
+
+if page == 'About':
+
+    st.subheader('Background')
+    st.write("Airbnb was started in 2007 and has been disrupting the hospitality industry ever since. Hosts on Airbnb offer unique stays and local experiences for travelers that can't be replicated by a stay in a hotel. According to a recent study by [SmartAsset](https://smartasset.com/mortgage/where-do-airbnb-hosts-make-the-most-money), hosts in major US cities can expect an annual profit of around $20,000 for renting out a two-bedroom apartment after expenses or can expect to pay about 80% of their rent on average from renting out one room in a two-bedroom place. As the popularity of Airbnb continues, it's clear that renting out an entire place or room can be a profitable venture.")
+    st.write("There are a lot of apps out there to help hosts price their listing, but not a lot that look at what helps to make a listing popular in the first place. The goal of this project is to help hosts understand what makes and Airbnb listing the most popular on the DC market and what to focus on to make their listing more competitive and increase their profits.")
+
+    st.subheader('App Overview')
+    st.write("My name is Rachael Friedman and I am a data scientist that has created an app for hosts in DC to use to make their listing as strong as possible. Hosts can use this application to generate a prediction on whether their listing will be considered popular on the DC Airbnb market given its features and get suggestions on what to add to the listing to increase popularity.")
+    st.write('Popularity in this project is defined as a listing having over a 4.8 overall rating and 60 or more reviews. The data used for this project is collected from [Inside Airbnb](http://insideairbnb.com/index.html) and overlayed with DC venue information from the [Foursquare API](https://developer.foursquare.com/).')
+
+    st.subheader('More Information')
+    st.write('Check out the project GitHub repo for more information at [DC Hosting Helper](https://github.com/rgfriedman/Airbnb_listings_capstone).')
+    st.write('You can also get in touch with me at [my page](https://rgfriedman.github.io/).')
+
+if page =='Explore DC Airbnb Data':

@@ -1,4 +1,4 @@
-# Washington D.C. Airbnb Hosting Helper
+# Washington DC Airbnb Hosting Helper
 
 ### Author
 
@@ -29,6 +29,7 @@ Folder|Description|
 |data|includes the data used for this project, starting with initial versions and iterating through to final versions|
 |models|this is where all pickled information needed for modeling in the Streamlit app is stored|
 |presentation.pdf|a PDF version of the slide presentation for this project|
+|requirements.txt|requirements file for Streamlit app|
 
 ---
 
@@ -177,6 +178,6 @@ My best predictive model is the Extra Trees Classifier with the default paramter
 
 Overall, these model scores improve upon the baseline and I am happy with this as the final model for production and think it will be useful for hosts. However, I was curious why the metrics were hovering in the low to mid 80s and I could not improve on the baseline more and realized it may be due to the data itself. The characteristics in listings that are not popular and popular may not have that distinct of differences in their features and so the models can only do so much with this situaion. In the exploratory data analysis phase of this project, we learned that most airbnb listings are all rated pretty highly so this may be the case. This is an important finding to keep in mind to understand the results. 
 
-There are a couple of limitations for these models. The first is addressed above, that there may not be enough differentiatio between the two classes to improve upon the baseline score with unbalanced classes too much. Second, the popularity metric is not a perfect metric because longer stays will have fewer reviews which is a limitation. However, according to [IPropertyManagement](https://ipropertymanagement.com/research/airbnb-statistics), a site that has conducted research on Airbnb listings worldwide, the average stay in an Airbnb is 4.3 nights. With this information, I can say that popularity metric should be representative of the average stay in DC but we should keep in mind the limitation. Lastly, it would have been nice to have more data to analyze if so many of the listings in the data were not outdated (not used in the past 12 months) and had to be removed. If there were more time, I would recommend gathering more data to evaulauate. It would be interesting to test models using different threshholds to calculate the popularity of listings and seeing if these yielded any better results. Also, I would have liked to explore the possibility of predicting popularity rankings and not just a binary class. 
+There are a couple of limitations for these models. The first is addressed above, that there may not be enough differentiatio between the two classes to improve upon the baseline score with unbalanced classes too much. Second, the popularity metric is not a perfect metric because longer stays will have fewer reviews which is a limitation. However, according to [IPropertyManagement](https://ipropertymanagement.com/research/airbnb-statistics), a site that has conducted research on Airbnb listings worldwide, the average stay in an Airbnb is 4.3 nights. With this information, I can say that popularity metric should be representative of the average stay in DC but we should keep in mind the limitation. Lastly, it would have been nice to have more data to analyze if so many of the listings in the data were not outdated (not used in the past 12 months) and had to be removed. If there were more time, I would recommend gathering more data to evaluate. It would be interesting to test models using different threshholds to calculate the popularity of listings and seeing if these yielded any better results. Also, I would have liked to explore the possibility of predicting popularity rankings and not just a binary class. 
 
 My recommendations for hosts is that this application can be used as a helpful tool to evaluate your listing. There are a lot of apps out there to help hosts predict the price for their listing, but not a lot that are looking at what helps to make a listing popular in the first place. This application will return any features in your listing that you can add to increase the odds of the listing being popular. This app will help hosts improve their listing to be more popular on the market which should increase their profits. 
