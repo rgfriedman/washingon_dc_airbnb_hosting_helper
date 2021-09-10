@@ -6,6 +6,12 @@ Rachael Friedman
 
 ---
 
+### App
+
+[Washington DC Airbnb Hosting Helper App](https://share.streamlit.io/rgfriedman/airbnb_listings_capstone/main/app/hosting_helper.py)
+
+---
+
 ### Executive Summary
 
 Airbnb was started in 2007 and has been disrupting the hospitality industry ever since. Hosts on Airbnb offer unique stays and local experiences for travelers that can't be replicated by a stay in a hotel. According to [their site,](https://news.airbnb.com/about-us/) Airbnb has helped over 4 million hosts welcome over 900 million guests in almost every country around the world. 
